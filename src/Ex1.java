@@ -25,7 +25,7 @@ public class Ex1 {
 //        System.out.println(value);
         //int value = number2Int("10bG");
         //System.out.println(value);
-        boolean check = isNumber("1AbF");
+        boolean check = isNumber("55b10");
         System.out.println(check);
 
         /**
@@ -73,7 +73,7 @@ public class Ex1 {
             int charIntValue = convertCharToInt(ch_i); // convert the char to its int value
 
             // Here we dynamically add the values. For instance ABC in base G(16) = 10*16^2+11*16^1+12*16^0
-            valueIn_10 += (int) (charIntValue*Math.pow(baseAsInt, valueIn_bLength-i-1));
+            valueIn_10 += (int) (charIntValue * Math.pow(baseAsInt, valueIn_bLength - i - 1));
         }
         ans = valueIn_10;
 
@@ -125,13 +125,14 @@ public class Ex1 {
     /**
      * This static function checks if the given String (g) is in a valid "number" format.
      * Our valid "number" format is as follows:
-     *      default: Base 10 is default, so if "number" only has digits, it will be accepted
-     *      first: "number" must be in the format of {value}b{base}
-     *      second: All chars in the String must be uppercase, except the small 'b' that divides {value} and {base}
-     *      third: base must be either 2-9, or 'A'-'G' [base 10 - base 16]
-     *      fourth: All chars and digits in {value} must be lower than the digit/char in base.
-     *              For instance, if base is 9, {value} must use 0-8. If base is E, {value} must use 0-9,A-D
-     *      fifth:
+     * default: Base 10 is default, so if "number" only has digits, it will be accepted
+     * first: "number" must be in the format of {value}b{base}
+     * second: All chars in the String must be uppercase, except the small 'b' that divides {value} and {base}
+     * third: base must be either 2-9, or 'A'-'G' [base 10 - base 16]
+     * fourth: All chars and digits in {value} must be lower than the digit/char in base.
+     * For instance, if base is 9, {value} must use 0-8. If base is E, {value} must use 0-9,A-D
+     * fifth:
+     *
      * @param numString a String representing a number
      * @return true iff the given String is in a number format
      */
@@ -140,16 +141,15 @@ public class Ex1 {
 
         // default case: only digits in the String,
         if (numString.matches("\\d+")) {
-            return ans; // =true
+            return true;
         }
 
         // first rule: check if in format {value}b{base}
         String[] splittedString = numString.split("b");
-        // Check if length of splittedString is exactly 2.
+        // Check if length of splittedString is exactly 2 => [{value},{base}]
         // Otherwise, return false. Could be more than one 'b' or none at all.
         if (splittedString.length != 2) {
-            ans = false;
-            return ans;
+            return false;
         }
         String value = splittedString[0];
         String baseAsString = splittedString[1];
@@ -157,15 +157,41 @@ public class Ex1 {
         // second rule: all chars must be uppercase, except the small 'b'
         // We will check in splittedString if {value} and {base} are upper case
         // We will convert numString to uppercase, and then compare numStringUpperCase with numString
-        if(!equals(value, value.toUpperCase())){ // first we check if {value} is only uppercase
-            ans = false;
-            return ans;
-        } else if(!equals(baseAsString, baseAsString.toUpperCase())){ // then we check if {base} is only uppercase
-            ans = false;
-            return ans;
+        if (!equals(value, value.toUpperCase())) { // first we check if {value} is only uppercase
+            return false;
+        } else if (!equals(baseAsString, baseAsString.toUpperCase())) { // then we check if {base} is only uppercase
+            return false;
         }
 
-        // third rule:
+        // third rule: base must be either 2-9, or 'A'-'G'
+        // We'll check if the length is 1, since it must be 1 char or 1 digit.
+        if (baseAsString.length() != 1) {
+            return false;
+        }
+
+        // We get hold of the single char from baseAsString
+        char baseCh = baseAsString.charAt(0);
+        // Now we want to check if baseChar is either '1'-'9' or 'A'-'G'
+        if (!((baseCh >= '1' && baseCh <= '9') || (baseCh >= 'A' && baseCh <= 'G'))) { // We check it by using char values
+            return false;
+        }
+
+        // fourth rule: All chars and digits in {value} must be lower than the digit/char in base.
+        // We'll divide the check, the case when the base is a digit, and when it is a char
+        for (int i = 0; i < value.length(); i++) { // iterates through String Value
+            char c = value.charAt(i);
+            if (Character.isDigit(baseCh)) { // 1. If the base is a digit:
+                int baseDigit = Character.getNumericValue(baseCh); // convert baseCh to its int value
+                if (c >= baseDigit && c <= 9) { // and check if there are any digits >= baseDigit and <= 9
+                    return false;
+                }
+            } else { // 2. If the base is a char (A-G)
+                if (c >= baseCh && c <= 'G') {
+                    return false;
+                }
+            }
+        }
+
 
         return ans;
     }
@@ -205,7 +231,7 @@ public class Ex1 {
 
         // We will loop through the chars, and compare them
         for (int i = 0; i < n1.length(); i++) {
-            if(n1.charAt(i) != n2.charAt(i)) {
+            if (n1.charAt(i) != n2.charAt(i)) {
                 ans = false;
                 return ans;
             }
