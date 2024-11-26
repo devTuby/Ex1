@@ -23,8 +23,16 @@ public class Ex1 {
 //        char ch = '4';
 //        int value = (int) ch;
 //        System.out.println(value);
-        int value = number2Int("10bG");
-        System.out.println(value);
+        //int value = number2Int("10bG");
+        //System.out.println(value);
+        //boolean check = isNumber("12b");
+        //System.out.println(check);
+
+        /**
+         *  NEED TO CHECK WHAT HAPPENS IF STRING CONTAINS
+         *  not numbers and not chars, *@#&%!) or other weird stuff
+         */
+
     }
 
     /**
@@ -137,10 +145,15 @@ public class Ex1 {
 
         // first rule: check if in format {value}b{base}
         String[] splittedString = numString.split("b");
+        // Check if length of splittedString is exactly 2.
+        // Otherwise, return false. Could be more than one 'b' or none at all.
         if (splittedString.length != 2) {
             ans = false;
             return ans;
         }
+
+        // second rule: all chars must be uppercase, except the small 'b'
+        // We will check in splittedString if {value} and {base} are upper case
 
         return ans;
     }
@@ -171,9 +184,21 @@ public class Ex1 {
      */
     public static boolean equals(String n1, String n2) {
         boolean ans = true;
-        // add your code here
 
-        ////////////////////
+        // We will first check if their length are the same
+        if (n1.length() != n2.length()) {
+            ans = false;
+            return ans;
+        }
+
+        // We will loop through the chars, and compare them
+        for (int i = 0; i < n1.length(); i++) {
+            if(n1.charAt(i) != n2.charAt(i)) {
+                ans = false;
+                return ans;
+            }
+        }
+
         return ans;
     }
 
