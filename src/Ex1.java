@@ -81,11 +81,11 @@ public class Ex1 {
     public static int convertBaseToInt(String base) {
         // Check if base is already represented in digits (2-9)
         if (base.matches("\\d+")) {
-            return Integer.parseInt(base);
+            return Integer.parseInt(base); // Convert String "base" to int
         }
         // Now we know 'base' must be A-G (base 10 - base 16), so we will convert it to its int value
-        char baseChar = base.charAt(0);
-        return convertCharToInt(baseChar);
+        char baseChar = base.charAt(0); // Get first char of String, which is the only char
+        return convertCharToInt(baseChar); // return its corresponding int value
     }
 
     /**
@@ -135,7 +135,12 @@ public class Ex1 {
             return ans; // =true
         }
 
-        // first rule:
+        // first rule: check if in format {value}b{base}
+        String[] splittedString = numString.split("b");
+        if (splittedString.length != 2) {
+            ans = false;
+            return ans;
+        }
 
         return ans;
     }
