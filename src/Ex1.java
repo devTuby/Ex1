@@ -25,8 +25,9 @@ public class Ex1 {
 //        System.out.println(value);
         //int value = number2Int("10bG");
         //System.out.println(value);
-        boolean check = isNumber("55b10");
-        System.out.println(check);
+        //boolean check = isStringOnlyDigits("1234s");
+        //System.out.println(check);
+        //System.out.println(19823/16);
 
         /**
          *  NEED TO CHECK WHAT HAPPENS IF STRING CONTAINS
@@ -81,14 +82,30 @@ public class Ex1 {
     }
 
     /**
-     * This static functions converts a String (base) to its corresponding int value (2-16)
+     * This static function checks if all the chars of a String are digits
+     *
+     * @param str
+     * @return true if the String contains only digits
+     */
+    public static boolean isStringOnlyDigits(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * This static function converts a String (base) to its corresponding int value (2-16)
      *
      * @param base a String representing a base
      * @return int value of the base, binary to Hexa (2-16)
      */
     public static int convertBaseToInt(String base) {
         // Check if base is already represented in digits (2-9)
-        if (base.matches("\\d+")) {
+        if (isStringOnlyDigits(base)) { // regex rule to check if
             return Integer.parseInt(base); // Convert String "base" to int
         }
         // Now we know 'base' must be A-G (base 10 - base 16), so we will convert it to its int value
@@ -140,7 +157,7 @@ public class Ex1 {
         boolean ans = true;
 
         // default case: only digits in the String,
-        if (numString.matches("\\d+")) {
+        if (isStringOnlyDigits(numString)) {
             return true;
         }
 
@@ -197,6 +214,21 @@ public class Ex1 {
     }
 
     /**
+     * This function converts intValue 0-15 to '0'-'9'-'A'-'F'
+     *
+     * @param intValue 0-15 corresponded to 0-9 or 'A'-'F' (10-15)
+     * @return char represting
+     */
+    public static char convertIntToChar(int intValue) {
+        if (intValue >= 0 && intValue <= 9) {
+            return (char) ('0' + intValue);  // convert 0-9 to '0'-'9', since in ASCII table they have increasing values
+        } else if (intValue >= 10 && intValue <= 15) {
+            return (char) ('A' + (intValue - 10));  // convert 10-15 to 'A'-'F', since in ASCII table they have increasing values
+        }
+        return '?';
+    }
+
+    /**
      * Calculate the number representation (in basis base)
      * of the given natural number (represented as an integer).
      * If num<0 or base is not in [2,16] the function should return "" (the empty String).
@@ -207,9 +239,16 @@ public class Ex1 {
      */
     public static String int2Number(int num, int base) {
         String ans = "";
-        // add your code here
 
-        ////////////////////
+        int intDivision = num;
+        int remainder;
+
+        do{
+            remainder = intDivision % base;
+            ans = convertIntToChar(remainder) + ans;
+            intDivision /= base;
+        } while (intDivision != 0);
+
         return ans;
     }
 
