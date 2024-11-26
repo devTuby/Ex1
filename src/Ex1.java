@@ -25,8 +25,8 @@ public class Ex1 {
 //        System.out.println(value);
         //int value = number2Int("10bG");
         //System.out.println(value);
-        //boolean check = isNumber("12b");
-        //System.out.println(check);
+        boolean check = isNumber("1AbF");
+        System.out.println(check);
 
         /**
          *  NEED TO CHECK WHAT HAPPENS IF STRING CONTAINS
@@ -151,9 +151,21 @@ public class Ex1 {
             ans = false;
             return ans;
         }
+        String value = splittedString[0];
+        String baseAsString = splittedString[1];
 
         // second rule: all chars must be uppercase, except the small 'b'
         // We will check in splittedString if {value} and {base} are upper case
+        // We will convert numString to uppercase, and then compare numStringUpperCase with numString
+        if(!equals(value, value.toUpperCase())){ // first we check if {value} is only uppercase
+            ans = false;
+            return ans;
+        } else if(!equals(baseAsString, baseAsString.toUpperCase())){ // then we check if {base} is only uppercase
+            ans = false;
+            return ans;
+        }
+
+        // third rule:
 
         return ans;
     }
