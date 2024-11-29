@@ -23,8 +23,10 @@ public class Ex1 {
 //        char ch = '4';
 //        int value = (int) ch;
 //        System.out.println(value);
-        //int value = number2Int("10bG");
-        //System.out.println(value);
+        String[] arr = new String[]{"ABbG", "ACbG", "ADbG"};
+        int maxIndex = maxIndex(arr);
+        System.out.println(maxIndex);
+        System.out.println(arr[maxIndex]);
         //boolean check = isStringOnlyDigits("1234s");
         //System.out.println(check);
         //System.out.println(19823/16);
@@ -37,7 +39,7 @@ public class Ex1 {
     }
 
     /**
-     * Convert the given number (num) to a decimal representation (as int).
+     * Convert the given number (num) in any base, to a decimal (base 10) representation (as int).
      * It the given number is not in a valid format returns -1.
      *
      * @param num a String representing a number in basis [2,16]
@@ -284,14 +286,20 @@ public class Ex1 {
      * In case there are more than one maximum - returns the first index.
      * Note: you can assume that the array is not null and is not empty, yet it may contain null or none-valid numbers (with value -1).
      *
-     * @param arr an array of numbers
      * @return the index in the array in with the largest number (in value).
      */
     public static int maxIndex(String[] arr) {
-        int ans = 0;
-        // add your code here
+        int max = -1;
+        int maxIndex = -1;
 
-        ////////////////////
-        return ans;
+        for (int i = 0; i < arr.length; i++) {
+            int numInDecimal = number2Int(arr[i]);
+            if (numInDecimal > max) {
+                max = numInDecimal;
+                maxIndex = i;
+            }
+        }
+
+        return maxIndex;
     }
 }
