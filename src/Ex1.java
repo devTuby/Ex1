@@ -29,9 +29,12 @@ public class Ex1 {
 //        System.out.println(number2Int(num));
 
         //System.out.println(int2Number(number2Int("1011bA"),2));
-        System.out.println(equals("1011bA", "1111110011b2"));
-        System.out.println(number2Int("1011bA"));
-        System.out.println(int2Number(1011, 2));
+//        System.out.println(equals("1011bA", "1111110011b2"));
+//        System.out.println(number2Int("1011bA"));
+//        System.out.println(int2Number(1011, 2));
+
+//        System.out.println(int2Number(158, 16));
+        System.out.println(convertCharToInt('s'));
 
         /**
          *  NEED TO CHECK WHAT HAPPENS IF STRING CONTAINS
@@ -176,6 +179,11 @@ public class Ex1 {
     public static boolean isNumber(String numString) {
         boolean ans = true;
 
+        // numString can't be null or empty
+        if (numString == null || numString.isEmpty()) {
+            return false;
+        }
+
         // default case: only digits in the String,
         if (isStringOnlyDigits(numString)) {
             return true;
@@ -243,16 +251,16 @@ public class Ex1 {
     }
 
     /**
-     * This function converts intValue 0-15 to '0'-'9'-'A'-'F'
+     * This function converts intValue 0-16 to '0'-'9'-'A'-'G'
      *
-     * @param intValue 0-15 corresponded to 0-9 or 'A'-'F' (10-15)
+     * @param intValue 0-15 corresponded to 0-9 or 'A'-'G' (10-16)
      * @return char represting
      */
     public static char convertIntToChar(int intValue) {
         if (intValue >= 0 && intValue <= 9) {
             return (char) ('0' + intValue);  // convert 0-9 to '0'-'9', since in ASCII table they have increasing values
-        } else if (intValue >= 10 && intValue <= 15) {
-            return (char) ('A' + (intValue - 10));  // convert 10-15 to 'A'-'F', since in ASCII table they have increasing values
+        } else if (intValue >= 10 && intValue <= 16) {
+            return (char) ('A' + (intValue - 10));  // convert 10-16 to 'A'-'G', since in ASCII table they have increasing values
         }
         return '?';
     }
