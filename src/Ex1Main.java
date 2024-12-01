@@ -16,9 +16,53 @@ public class Ex1Main {
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
             num1 = sc.next();
             if (!num1.equals("quit")) {
-                // add your code here
+                boolean isNum1Number = Ex1.isNumber(num1); // save boolean of isNumber(num1)
+                // print our wanted text, to show current results
+                System.out.println("num1= " + num1 + " is number: " + isNum1Number + " , value: " + Ex1.number2Int(num1));
+                if (!isNum1Number) { // print appropriate text if num1 is in wrong format
+                    System.out.println("ERR: num1 is in the wrong format! (" + num1 + ")");
+                    continue;
+                } else { // if num1 is in valid format
+                    // save num1 value for later calculations
+                    int num1Value = Ex1.number2Int(num1);
 
-                /////////////////////
+                    System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");
+                    num2 = sc.next();
+                    if (!num2.equals("quit")){
+                        boolean isNum2Number = Ex1.isNumber(num2); // save boolean of isNumber(num2)
+                        System.out.println("num2= " + num2 + " is number: " + isNum2Number + " , value: " + Ex1.number2Int(num2));
+                        if (!isNum2Number) {// print appropriate text if num2 is in wrong format
+                            System.out.println("ERR: num2 is in the wrong format! (" + num2 + ")");
+                            continue;
+                        } else { // if num2 is in valid format
+                            // save num2 value for later calculations
+                            int num2Value = Ex1.number2Int(num2);
+
+                            System.out.println("Enter a base for output: (a number [2,16]");
+                            String base = sc.next();
+                            int baseIntValue = Ex1.convertBaseToInt(base);
+                            /** check if valid
+                             * because it crashes
+                             **/
+
+                            int num1PlusNum2Value = num1Value + num2Value;
+                            String num1PlusNum2InBase = Ex1.int2Number(num1PlusNum2Value, baseIntValue);
+
+                            int num1TimesNum2Value = num1Value * num2Value;
+                            String num1TimesNum2InBase = Ex1.int2Number(num1TimesNum2Value, baseIntValue);
+
+                            System.out.println(num1 + " + " + num2 + " = " + num1PlusNum2InBase);
+                            System.out.println(num1 + " * " + num2 + " = " + num1TimesNum2InBase);
+
+                            String[] nums = {num1, num2, num1PlusNum2InBase, num1TimesNum2InBase};
+                            int maxNumIndex = Ex1.maxIndex(nums);
+
+                            System.out.println("Max number over [" + num1 + "," + num2 + "," + num1PlusNum2InBase + "," + num1TimesNum2InBase + "] is: " + nums[maxNumIndex]);
+
+                        }
+                    }
+                }
+                System.out.println();
             }
         }
         System.out.println("quiting now...");

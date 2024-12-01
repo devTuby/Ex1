@@ -1,5 +1,7 @@
 //package assignments.ex1;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -20,26 +22,6 @@ public class Ex1 {
      * REMEMBER TO DELETE THIS MAIN
      */
     public static void main(String[] args) {
-
-
-//        System.out.println(number2Int("1011b2"));
-//        System.out.println(number2Int("1011bA"));
-//        String num = int2Number(1011, 2);
-//        System.out.println(num);
-//        System.out.println(number2Int(num));
-
-        //System.out.println(int2Number(number2Int("1011bA"),2));
-//        System.out.println(equals("1011bA", "1111110011b2"));
-//        System.out.println(number2Int("1011bA"));
-//        System.out.println(int2Number(1011, 2));
-
-//        System.out.println(int2Number(158, 16));
-        System.out.println(convertCharToInt('s'));
-
-        /**
-         *  NEED TO CHECK WHAT HAPPENS IF STRING CONTAINS
-         *  not numbers and not chars, *@#&%!) or other weird stuff
-         */
 
     }
 
@@ -276,6 +258,10 @@ public class Ex1 {
      */
     public static String int2Number(int num, int base) {
         String ans = "";
+
+        if(base == 10){
+            return Integer.toString(num);
+        }
 
         int intDivision = num;
         int remainder;
