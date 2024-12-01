@@ -1,5 +1,7 @@
 //package assignments.ex1;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
  * This class represents a simple solution for Ex1.
  * As defined here: https://docs.google.com/document/d/1AJ9wtnL1qdEs4DAKqBlO1bXCM6r6GJ_J/r/edit/edit
@@ -18,18 +20,18 @@ public class Ex1 {
      * REMEMBER TO DELETE THIS MAIN
      */
     public static void main(String[] args) {
-//        System.out.println(convertCharToInt('G'));
-//        System.out.println(convertBaseToInt("F"));
-//        char ch = '4';
-//        int value = (int) ch;
-//        System.out.println(value);
-        String[] arr = new String[]{"ABbG", "ACbG", "ADbG"};
-        int maxIndex = maxIndex(arr);
-        System.out.println(maxIndex);
-        System.out.println(arr[maxIndex]);
-        //boolean check = isStringOnlyDigits("1234s");
-        //System.out.println(check);
-        //System.out.println(19823/16);
+
+
+//        System.out.println(number2Int("1011b2"));
+//        System.out.println(number2Int("1011bA"));
+//        String num = int2Number(1011, 2);
+//        System.out.println(num);
+//        System.out.println(number2Int(num));
+
+        //System.out.println(int2Number(number2Int("1011bA"),2));
+        System.out.println(equals("1011bA", "1111110011b2"));
+        System.out.println(number2Int("1011bA"));
+        System.out.println(int2Number(1011, 2));
 
         /**
          *  NEED TO CHECK WHAT HAPPENS IF STRING CONTAINS
@@ -100,6 +102,22 @@ public class Ex1 {
     }
 
     /**
+     * This static function checks if all the chars of a String are digits/letters
+     *
+     * @param str
+     * @return true if the String contains only digits/letters
+     */
+    public static boolean isStringOnlyLettersOrDigits(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (!Character.isLetterOrDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * This static function converts a String (base) to its corresponding int value (2-16)
      *
      * @param base a String representing a base
@@ -145,7 +163,7 @@ public class Ex1 {
      * This static function checks if the given String (g) is in a valid "number" format.
      * Our valid "number" format is as follows:
      * default: Base 10 is default, so if "number" only has digits, it will be accepted
-     * first: "number" must be in the format of {value}b{base}
+     * first: "number" must be in the format of {value}b{base} and {value} & {base} not empty and contain letters/digits
      * second: All chars in the String must be uppercase, except the small 'b' that divides {value} and {base}
      * third: base must be either 2-9, or 'A'-'G' [base 10 - base 16]
      * fourth: All chars and digits in {value} must be lower than the digit/char in base.
@@ -163,7 +181,7 @@ public class Ex1 {
             return true;
         }
 
-        // first rule: check if in format {value}b{base}
+        // first rule: check if in format {value}b{base} and {value} & {base} not empty
         String[] splittedString = numString.split("b");
         // Check if length of splittedString is exactly 2 => [{value},{base}]
         // Otherwise, return false. Could be more than one 'b' or none at all.
@@ -172,13 +190,21 @@ public class Ex1 {
         }
         String value = splittedString[0];
         String baseAsString = splittedString[1];
+        // make sure {value} and {base} are not empty
+        if (value.isEmpty() || baseAsString.isEmpty()) {
+            return false;
+        }
+        // check if contain only letters/digits
+        if (!isStringOnlyLettersOrDigits(value) || !isStringOnlyLettersOrDigits(baseAsString)) {
+            return false;
+        }
 
         // second rule: all chars must be uppercase, except the small 'b'
         // We will check in splittedString if {value} and {base} are upper case
         // We will convert numString to uppercase, and then compare numStringUpperCase with numString
-        if (!equals(value, value.toUpperCase())) { // first we check if {value} is only uppercase
+        if (!value.equals(value.toUpperCase())) { // first we check if {value} is only uppercase
             return false;
-        } else if (!equals(baseAsString, baseAsString.toUpperCase())) { // then we check if {base} is only uppercase
+        } else if (!baseAsString.equals(baseAsString.toUpperCase())) { // then we check if {base} is only uppercase
             return false;
         }
 
@@ -201,7 +227,8 @@ public class Ex1 {
             char c = value.charAt(i);
             if (Character.isDigit(baseCh)) { // 1. If the base is a digit:
                 int baseDigit = Character.getNumericValue(baseCh); // convert baseCh to its int value
-                if (c >= baseDigit && c <= 9) { // and check if there are any digits >= baseDigit and <= 9
+                int cDigit = Character.getNumericValue(c); // convert c (must be digit) to its int value
+                if (cDigit >= baseDigit && cDigit <= 9) { // and check if there are any digits >= baseDigit and <= 9
                     return false;
                 }
             } else { // 2. If the base is a char (A-G)
@@ -245,12 +272,15 @@ public class Ex1 {
         int intDivision = num;
         int remainder;
 
-        do{
+        // This algo is to find the representation of the num in a given base
+        do {
             remainder = intDivision % base;
             ans = convertIntToChar(remainder) + ans;
             intDivision /= base;
         } while (intDivision != 0);
 
+        // Now we want to add "b{base}" to the final answer
+        ans = ans + "b" + convertIntToChar(base);
         return ans;
     }
 
@@ -262,23 +292,11 @@ public class Ex1 {
      * @return true iff the two numbers have the same values.
      */
     public static boolean equals(String n1, String n2) {
-        boolean ans = true;
 
-        // We will first check if their length are the same
-        if (n1.length() != n2.length()) {
-            ans = false;
-            return ans;
+        if (number2Int(n1) != number2Int(n2)) {
+            return false;
         }
-
-        // We will loop through the chars, and compare them
-        for (int i = 0; i < n1.length(); i++) {
-            if (n1.charAt(i) != n2.charAt(i)) {
-                ans = false;
-                return ans;
-            }
-        }
-
-        return ans;
+        return true;
     }
 
     /**
