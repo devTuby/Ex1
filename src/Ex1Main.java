@@ -39,11 +39,15 @@ public class Ex1Main {
                             int num2Value = Ex1.number2Int(num2);
 
                             System.out.println("Enter a base for output: (a number [2,16]");
-                            String base = sc.next();
+                            int baseIntInput = sc.nextInt();
+                            // We check if the input is between [2,16]
+                            if(baseIntInput > 16 || baseIntInput < 2){
+                                System.out.println("ERR: wrong base, should be [2,16], got (" + baseIntInput + ")");
+                                continue;
+                            };
+
+                            String base = Integer.toString(baseIntInput);
                             int baseIntValue = Ex1.convertBaseToInt(base);
-                            /** check if valid
-                             * because it crashes
-                             **/
 
                             int num1PlusNum2Value = num1Value + num2Value;
                             String num1PlusNum2InBase = Ex1.int2Number(num1PlusNum2Value, baseIntValue);
