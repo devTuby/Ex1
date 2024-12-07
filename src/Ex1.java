@@ -257,9 +257,12 @@ public class Ex1 {
      * @return a String representing a number (in base) equals to num, or an empty String (in case of wrong input).
      */
     public static String int2Number(int num, int base) {
-        String ans = "";
+        // We use StringBuilder, to dynamically change the String as we calculate it
+        // and the IDE alerts us that String concatenation in loop is not suggested.
+        StringBuilder ans = new StringBuilder(); // Create out 'ans' StringBuilder
 
-        if(base == 10){
+        if(base == 10){ // If we want the num to be in base 10, the num is already in decimal basis,
+                        // so we just need to return the num itself, since the default base, we don't need {num}b10
             return Integer.toString(num);
         }
 
@@ -269,13 +272,13 @@ public class Ex1 {
         // This algo is to find the representation of the num in a given base
         do {
             remainder = intDivision % base;
-            ans = convertIntToChar(remainder) + ans;
+            ans.insert(0, convertIntToChar(remainder));
             intDivision /= base;
         } while (intDivision != 0);
 
         // Now we want to add "b{base}" to the final answer
-        ans = ans + "b" + convertIntToChar(base);
-        return ans;
+        ans.append("b").append(convertIntToChar(base));
+        return ans.toString(); // convert our StringBuild to String
     }
 
     /**

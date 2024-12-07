@@ -46,6 +46,7 @@ public class Ex1Test {
         assertEquals(Ex1.int2Number(987, 6), "4323b6");
         assertEquals(Ex1.int2Number(987, 16), "3DBbG");
         assertEquals(Ex1.int2Number(4095, 16), "FFFbG");
+        assertEquals(Ex1.int2Number(999, 10), "999");
     }
 
     @Test
