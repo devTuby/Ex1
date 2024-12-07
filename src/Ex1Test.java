@@ -100,21 +100,21 @@ public class Ex1Test {
     }
 
     @Test
-    void convertIntToCharTest(){
-        for (int i = 0; i <= 9 ; i++) {
+    void convertIntToCharTest() {
+        for (int i = 0; i <= 9; i++) {
             char ch = (char) (i + '0');
             assertEquals(ch, Ex1.convertIntToChar(i));
         }
 
-        for (int i = 10; i <= 16 ; i++) {
-            char ch = (char) ((i-10) + 'A');
+        for (int i = 10; i <= 16; i++) {
+            char ch = (char) ((i - 10) + 'A');
             assertEquals(ch, Ex1.convertIntToChar(i));
         }
     }
 
     @Test
-    void convertBaseToIntTest(){
-        for (int i = 2; i <= 16 ; i++) {
+    void convertBaseToIntTest() {
+        for (int i = 2; i <= 16; i++) {
             char ch = Ex1.convertIntToChar(i);
             assertEquals(Ex1.convertCharToInt(ch), Ex1.convertBaseToInt(Character.toString(ch)));
         }

@@ -17,14 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * You should implement the following static functions:
  */
 public class Ex1 {
-
-    /**
-     * REMEMBER TO DELETE THIS MAIN
-     */
-    public static void main(String[] args) {
-
-    }
-
     /**
      * Convert the given number (num) in any base, to a decimal (base 10) representation (as int).
      * It the given number is not in a valid format returns -1.
@@ -261,8 +253,8 @@ public class Ex1 {
         // and the IDE alerts us that String concatenation in loop is not suggested.
         StringBuilder ans = new StringBuilder(); // Create out 'ans' StringBuilder
 
-        if(base == 10){ // If we want the num to be in base 10, the num is already in decimal basis,
-                        // so we just need to return the num itself, since the default base, we don't need {num}b10
+        if (base == 10) { // If we want the num to be in base 10, the num is already in decimal basis,
+            // so we just need to return the num itself, since the default base, we don't need {num}b10
             return Integer.toString(num);
         }
 
@@ -289,11 +281,8 @@ public class Ex1 {
      * @return true iff the two numbers have the same values.
      */
     public static boolean equals(String n1, String n2) {
-
-        if (number2Int(n1) != number2Int(n2)) {
-            return false;
-        }
-        return true;
+        // We use our number2Int functions to convert the n1,n2 Strings to decimal representation, and then check if the numbers are equal
+        return number2Int(n1) == number2Int(n2);
     }
 
     /**
@@ -307,6 +296,7 @@ public class Ex1 {
         int max = -1;
         int maxIndex = -1;
 
+        // Loop through the arr, change the Strings in it, to decimal, and dynamically check which one is the maximum.
         for (int i = 0; i < arr.length; i++) {
             int numInDecimal = number2Int(arr[i]);
             if (numInDecimal > max) {

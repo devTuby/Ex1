@@ -1,15 +1,15 @@
 //package assignments.ex1;
+
 import java.util.Scanner;
 
 /**
  * Intro2CS, Ex1 - very basic "main template"
  * Make sure your implementation of this main performs as the Ex1Sol.jar solution implement all needed functions.
- *
  */
 public class Ex1Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String num1 = "", num2="", quit = "quit";
+        String num1 = "", num2 = "", quit = "quit";
         while (!num1.equals(quit) && !num2.equals(quit)) {
             System.out.println();
             System.out.println("Ex1 class solution:");
@@ -28,7 +28,7 @@ public class Ex1Main {
 
                     System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");
                     num2 = sc.next();
-                    if (!num2.equals("quit")){
+                    if (!num2.equals("quit")) {
                         boolean isNum2Number = Ex1.isNumber(num2); // save boolean of isNumber(num2)
                         System.out.println("num2= " + num2 + " is number: " + isNum2Number + " , value: " + Ex1.number2Int(num2));
                         if (!isNum2Number) {// print appropriate text if num2 is in wrong format
@@ -39,12 +39,25 @@ public class Ex1Main {
                             int num2Value = Ex1.number2Int(num2);
 
                             System.out.println("Enter a base for output: (a number [2,16]");
+
+                            // We should check the input is even an int, the solution that was posted, didn't check for it,
+                            // and the solution's Scanner throws and Exception. I've asked Ilan, and he replied we don't need to
+                            // add a check for it.
+                            // If we do need though, I would have added:
+                            /**
+                             *  if (!sc.hasNextInt()){
+                             *      System.out.println("You have not entered an int for a base");
+                             *      continue;
+                             *  }
+                             */
+
                             int baseIntInput = sc.nextInt();
                             // We check if the input is between [2,16]
-                            if(baseIntInput > 16 || baseIntInput < 2){
+                            if (baseIntInput > 16 || baseIntInput < 2) {
                                 System.out.println("ERR: wrong base, should be [2,16], got (" + baseIntInput + ")");
                                 continue;
-                            };
+                            }
+                            ;
 
                             String base = Integer.toString(baseIntInput);
                             int baseIntValue = Ex1.convertBaseToInt(base);
