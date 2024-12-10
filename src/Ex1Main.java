@@ -41,8 +41,11 @@ public class Ex1Main {
                             System.out.println("Enter a base for output: (a number [2,16]");
 
                             // We should check the input is even an int, the solution that was posted, didn't check for it,
-                            // and the solution's Scanner throws and Exception. I've asked Ilan, and he replied we don't need to
-                            // add a check for it.
+                            // and the solution's Scanner throws and Exception. I've asked Ilan (ours' Trigul Teacher),
+                            // and he replied we don't need to add a check for it.
+                            // The instructions were: "Edit Ex1Main.java so that it will perform as in the Ex1Sol.jar file."
+                            // So I do not want to add something that we were told not to add, even though
+                            // I do think it is necessary for the code to behave normally.
                             // If we do need though, I would have added:
                             /**
                              *  if (!sc.hasNextInt()){

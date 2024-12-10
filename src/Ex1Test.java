@@ -21,6 +21,8 @@ public class Ex1Test {
         int v2 = Ex1.number2Int(s2);
         assertEquals(v, v2);
         assertTrue(Ex1.equals(s10, s2));
+        assertTrue(Ex1.equals("FFFbG", "4095"));
+        assertTrue(Ex1.equals("FFFbG", "4095bA"));
     }
 
     @Test
