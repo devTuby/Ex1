@@ -4,6 +4,8 @@ In this project I explored the fundamentals of **functional programming** and **
 
 The program operates on string-based numbers across bases **2–16**, with bases 10–16 represented by characters `A, B, ..., G`. Input validation, testing, and iterative code refinement are emphasized for correctness and elegance.
 
+***I have suggested a fix for the given solution, as shown at the bottom.**
+
 ---
 
 ## **Key Features**
@@ -35,3 +37,25 @@ The program operates on string-based numbers across bases **2–16**, with bases
 3. **Main Program**: Create an interactive console application in `Ex1Main.java`.
 
 ---
+## **Suggested Fix**
+- In the given Ex1Sol.jar solution, there wasn't any handling if the user enteres in input for the base [2,16], that is not an int.
+- An example when Ex1Sol.jar crashes:
+```
+Enter a base for output: (a number [2,16]
+r
+Exception in thread "main" java.util.InputMismatchException
+        at java.base/java.util.Scanner.throwFor(Scanner.java:964)
+        at java.base/java.util.Scanner.next(Scanner.java:1619)
+        at java.base/java.util.Scanner.nextInt(Scanner.java:2284)
+        at java.base/java.util.Scanner.nextInt(Scanner.java:2238)
+        at ex1.Ex1Main.main(Ex1Main.java)
+```
+- An easy fix for it, is to add in the Ex1Main.java, a check whether the input is an int:
+```
+  System.out.println("Enter a base for output: (a number [2,16]");
+  if (!sc.hasNextInt()){
+      System.out.println("You have not entered an int for a base");
+      sc.next(); // to consume the wrong input
+      continue;
+  }
+```
