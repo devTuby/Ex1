@@ -48,10 +48,11 @@ public class Ex1Main {
                             // I do think it is necessary for the code to behave normally.
                             // If we do need though, I would have added:
                             /**
-                             *  if (!sc.hasNextInt()){
-                             *      System.out.println("You have not entered an int for a base");
-                             *      continue;
-                             *  }
+                                if (!sc.hasNextInt()) {
+                                    System.out.println("You have not entered an int for a base");
+                                    sc.next(); // to consume the wrong input
+                                    continue;
+                                }
                              */
 
                             int baseIntInput = sc.nextInt();
